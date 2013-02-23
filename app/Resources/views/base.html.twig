@@ -3,11 +3,41 @@
     <head>
         <meta charset="UTF-8" />
         <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
-        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        {% block stylesheets %}
+
+            <link href="{{ asset('/bootstrap/css/bootstrap.css') }}" type="text/css" rel="stylesheet" />
+            <link href="{{ asset('/css/main.css') }}" type="text/css" rel="stylesheet" />
+        {% endblock %}
+
+        {% block javascripts %}
+
+            <script src="{{ asset('/js/jquery-1.9.1.min.js') }}" type="text/javascript"></script>
+            <script src="{{ asset('/bootstrap/js/bootstrap.min.js') }}" type="text/javascript"></script>
+            <script src="{{ asset('/js/main.js') }}" type="text/javascript"></script>
+        {% endblock %}
+
+        <link rel="icon" type="image/x-icon" href="{{ asset('/images/favicon.ico') }}" />
     </head>
     <body>
-        {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
+        <header>
+            <div class="container">
+                <a href="/" class="logo"> RADIO</a>
+
+                <nav>
+                    <ul class="nav nav-pills">
+                        <li><a href="{{ path('song_homepage') }}">SONGS</a></li>
+                        <li><a href="{{ path('song_homepage') }}">ALBUMS</a></li>
+                        <li><a href="{{ path('song_homepage') }}">ARTISTS</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+
+        <div class="container">
+            {% block body %}{% endblock %}
+        </div>
+
     </body>
 </html>

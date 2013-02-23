@@ -1,0 +1,82 @@
+{% extends '::base.html.twig' %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script src="{{ asset('/js/jquery.dataTables.min.js') }}" type="text/javascript"></script>
+    <script src="{{ asset('/js/DT_bootstrap.js') }}" type="text/javascript"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function(){
+
+            $.extend( $.fn.dataTableExt.oStdClasses, {
+                "sWrapper": "dataTables_wrapper form-inline"
+            } );
+
+            $('#songs').dataTable( {
+                "sDom": "<'row'<'span6'l><'span6'f>r>t<'row'<'span6'i><'span6'p>>",
+                "sPaginationType": "bootstrap",
+                "oLanguage": {
+                    "sLengthMenu": "_MENU_ records per page"
+                }
+            } );
+        });
+    </script>
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+
+    <link href="{{ asset('/css/jquery.dataTables.css') }}" type="text/css" rel="stylesheet" />
+    <link href="{{ asset('/css/DT_bootstrap.css') }}" type="text/css" rel="stylesheet" />
+{% endblock %}
+
+
+{% block title %} Radio | List of Songs {% endblock %}
+
+
+{% block body %}
+<div class="page-header">
+    <h1>List of Songs <small>Listen to your favorite songs</small></h1>
+</div>
+<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered" id="songs">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Artist</th>
+            <th>Time</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for song in songs %}
+        <tr>
+            <td>{{song.title | e}}</td>
+            <td><strong>{{song.artist | e}}</strong></td>
+            <td>{{ song.time }}</td>
+            <td>
+                <a class="btn btn-primary btn-mini"><i class="icon-play icon-white"></i></a>
+                <div class="btn-group">
+                    <a class="btn btn-mini dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="icon-plus"></i>
+                        ADD <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a tabindex="-1" href="#">to History</a></li>
+                        <li class="divider"></li>
+                        <li><a tabindex="-1" href="#">Playlist 1</a></li>
+                        <li><a tabindex="-1" href="#">Playlist 2</a></li>
+                        <li><a tabindex="-1" href="#">Playlist 3</a></li>
+                        <li><a tabindex="-1" href="#">Playlist 4</a></li>
+                        <li><a tabindex="-1" href="#">Playlist 5</a></li>
+                        <li class="divider"></li>
+                        <li><a tabindex="-1" href="#">to a New Playlist</a></li>
+                    </ul>
+                </div>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}
